@@ -1,0 +1,9 @@
+﻿<Application x:Class="ONVIF_MediaProfilDashboard.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
+             StartupUri="ConnectCamera.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

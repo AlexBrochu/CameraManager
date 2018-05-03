@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONVIF_MediaProfilManager", "ONVIF_MediaProfilDashboard\ONVIF_MediaProfilManager.csproj", "{B534DF44-4BF9-4F22-8DB2-E704042233BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B534DF44-4BF9-4F22-8DB2-E704042233BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B534DF44-4BF9-4F22-8DB2-E704042233BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B534DF44-4BF9-4F22-8DB2-E704042233BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B534DF44-4BF9-4F22-8DB2-E704042233BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1126EEA-C610-4B52-9331-AAC0E54CBB0B}
+	EndGlobalSection
+EndGlobal
