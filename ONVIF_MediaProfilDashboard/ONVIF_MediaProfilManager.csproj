@@ -74,24 +74,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CameraLogger.xaml">
-      <SubType>Designer</SubType>
+    <Compile Include="VideoParam.cs" />
+    <Page Include="ConfigDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ConnectCamera.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ConfigDashboard.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CameraLogger.xaml.cs">
-      <DependentUpon>CameraLogger.xaml</DependentUpon>
+    <Compile Include="CameraConnexion.cs" />
+    <Compile Include="ConfigDashboard.xaml.cs">
+      <DependentUpon>ConfigDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConnectCamera.xaml.cs">
       <DependentUpon>ConnectCamera.xaml</DependentUpon>
@@ -105,10 +103,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="ConfigDashboard.xaml.cs">
-      <DependentUpon>ConfigDashboard.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +126,7 @@
     <None Include=".gitignore">
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <None Include="assets\properties\videoEncoderConfiguration.json" />
+    <None Include="assets\properties\savedLoginInfo.json" />
     <None Include="Connected Services\Device\b-2.xsd">
       <SubType>Designer</SubType>
     </None>

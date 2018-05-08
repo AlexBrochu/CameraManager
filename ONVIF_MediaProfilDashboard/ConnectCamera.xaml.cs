@@ -1,4 +1,5 @@
-﻿using ONVIF_MediaProfilDashboard.Device;
+﻿using Newtonsoft.Json;
+using ONVIF_MediaProfilDashboard.Device;
 using ONVIF_MediaProfilDashboard.Media;
 using System;
 using System.Collections.Generic;
@@ -19,49 +20,116 @@ using System.Windows.Shapes;
 
 namespace ONVIF_MediaProfilDashboard
 {
-    public class ConfigData
-    {
-        private string v_encode = "test";
-
-        public string VEncode { get => v_encode; set => v_encode = value; }
-    }
 
     /// <summary>
     /// Interaction logic for ConnectCamera.xaml
     /// </summary>
     public partial class ConnectCamera : Window
     {
+        int previousSavedConnIndex = -1;
+        List<CameraConnexion> cameras = new List<CameraConnexion>();
+        String path_to_connexion_file = AppDomain.CurrentDomain.BaseDirectory + @"\login_info.json";
+
+        VideoParam vp = new VideoParam();
+
         Media2Client media;
         UriBuilder deviceUri;
         MediaProfile[] profiles;
         ConfigDashboard cd = new ConfigDashboard();
-        ConfigData cdata = new ConfigData();
         String[] prms = { };
 
         public ConnectCamera()
         {
             InitializeComponent();
-            this.DataContext = cdata;
-            Console.WriteLine(cdata.VEncode);
-            Console.WriteLine(this.DataContext.ToString());
 
+            camera_name.GotFocus += InitTextbox;
             address.GotFocus += InitTextbox;
             user.GotFocus += InitTextbox;
             password.GotFocus += InitTextbox;
             button.Click += OnConnect;
+            save_btn.Click += OnSave;
+            listBox_saved.SelectionChanged += OnSavedSelectionChanged;
+            LoadConnexion();
+        }
+
+        private void OnSavedSelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (cameras != null && listBox_saved.SelectedIndex >= 0)
+            {
+                CameraConnexion cm = cameras.ElementAt(listBox_saved.SelectedIndex);
+                address.Text = cm.Address;
+                password.Password = cm.Password;
+                user.Text = cm.User;
+                camera_name.Text = cm.CameraName;
+
+                if (previousSavedConnIndex == listBox_saved.SelectedIndex)
+                {
+                    ConnectCam();
+                }
+                previousSavedConnIndex = listBox_saved.SelectedIndex;
+            }
+            listBox_saved.SelectedIndex = -1;
+        }
+
+        private void OnSave(object sender, RoutedEventArgs e)
+        {
+
+            if (camera_name.Text == "")
+            {
+                camera_name.Background = new SolidColorBrush(Colors.Red);
+            }
+            else if(address.Text == "")
+            {
+                address.Background = new SolidColorBrush(Colors.Red);
+            }
+            else if (user.Text == "")
+            {
+                user.Background = new SolidColorBrush(Colors.Red);
+            }
+            else if (password.Password == "")
+            {
+                password.Background = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                CameraConnexion cc = new CameraConnexion();
+                cc.Address = address.Text;
+                cc.CameraName = camera_name.Text;
+                cc.Password = password.Password;
+                cc.User = user.Text;
+
+                // write login info in json file
+                if (cameras == null)
+                {
+                    cameras = new List<CameraConnexion>();
+                }
+                cameras.Add(cc);
+                string json = JsonConvert.SerializeObject(cameras);
+                if (!File.Exists(path_to_connexion_file))
+                {
+                    File.CreateText(path_to_connexion_file).Close();
+                }
+                using (StreamWriter file = new StreamWriter(path_to_connexion_file, false))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, cameras);
+                }
+                LoadConnexion();
+
+            }
+            
         }
 
         private void OnConnect(object sender, RoutedEventArgs e)
         {
 
-            /*if (cd != null && cd.IsActive)
+            if (cd != null && cd.IsActive)
             {
                 return;
             }
-            cd.DataContext = this.DataContext;
-            cd.Show();*/
+            cd.Show();
 
-            ConnectCam();
+            //ConnectCam();
         }
 
         private void ConnectCam()
@@ -165,17 +233,36 @@ namespace ONVIF_MediaProfilDashboard
 
         private void InitTextbox(object sender, RoutedEventArgs e)
         {
-            if (((sender as Control).Foreground as SolidColorBrush)?.Color == Colors.DarkGray)
+            if (sender is TextBox)
             {
-                if (sender is TextBox)
+                (sender as TextBox).Text = "";
+                (sender as TextBox).Background = new SolidColorBrush(Colors.White);
+            }
+            else if (sender is PasswordBox)
+            {
+                (sender as PasswordBox).Password = "";
+                (sender as PasswordBox).Background = new SolidColorBrush(Colors.White);
+            }
+        }
+
+        private void LoadConnexion()
+        {
+            listBox_saved.Items.Clear();
+            if (!File.Exists(path_to_connexion_file))
+            {
+                File.CreateText(path_to_connexion_file).Close();
+            }
+            using (StreamReader file = File.OpenText(path_to_connexion_file))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                cameras = (List<CameraConnexion>)serializer.Deserialize(file, typeof(List<CameraConnexion>));
+                if (cameras != null)
                 {
-                    (sender as TextBox).Text = "";
+                    foreach (CameraConnexion cam in cameras)
+                    {
+                        listBox_saved.Items.Add(cam.CameraName);
+                    }
                 }
-                else if (sender is PasswordBox)
-                {
-                    (sender as PasswordBox).Password = "";
-                }
-                (sender as Control).Foreground = new SolidColorBrush(Colors.Black);
             }
         }
 
@@ -204,6 +291,7 @@ namespace ONVIF_MediaProfilDashboard
                 StreamVideoOnVLC(prms);
             }
         }
+
         System.ServiceModel.Channels.Binding WsdlBinding
         {
             get
@@ -213,6 +301,8 @@ namespace ONVIF_MediaProfilDashboard
                 return new CustomBinding(new TextMessageEncodingBindingElement(MessageVersion.Soap12WSAddressing10, Encoding.UTF8), httpTransport);
             }
         }
+
+        internal VideoParam Vp { get => vp; set => vp = value; }
 
         private void StreamVideoOnVLC(String[] recordParams)
         {
