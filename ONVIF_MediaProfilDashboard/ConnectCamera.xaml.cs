@@ -122,12 +122,20 @@ namespace ONVIF_MediaProfilDashboard
 
         private void OnConnect(object sender, RoutedEventArgs e)
         {
-
-            if (cd != null && cd.IsActive)
+            cd = new ConfigDashboard();
+            cd.vp = this.vp;
+            cd.ShowDialog();
+            bool res = cd.DialogResult;
+            if (res)
             {
-                return;
+                Console.WriteLine(cd.vp.Quality);
+                this.vp = cd.vp;
             }
-            cd.Show();
+            else
+            {
+                Console.WriteLine(cd.vp.Quality);
+            }
+
 
             //ConnectCam();
         }
