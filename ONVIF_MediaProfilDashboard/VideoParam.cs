@@ -8,8 +8,8 @@ namespace ONVIF_MediaProfilDashboard
 {
     public class VideoParam
     {
-        public string Quality { get; set; }
-        public string Width { get; set; }
-        public string Height { get; set; }
+        public int Quality { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
     }
 }

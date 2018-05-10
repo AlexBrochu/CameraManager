@@ -74,8 +74,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigDashboard.xaml.cs">
+      <DependentUpon>ConfigDashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VideoParam.cs" />
     <Page Include="ConfigDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfigParam.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -88,8 +95,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CameraConnexion.cs" />
-    <Compile Include="ConfigDashboard.xaml.cs">
-      <DependentUpon>ConfigDashboard.xaml</DependentUpon>
+    <Compile Include="ConfigParam.xaml.cs">
+      <DependentUpon>ConfigParam.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConnectCamera.xaml.cs">
       <DependentUpon>ConnectCamera.xaml</DependentUpon>

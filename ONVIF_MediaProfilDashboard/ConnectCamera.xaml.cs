@@ -35,12 +35,15 @@ namespace ONVIF_MediaProfilDashboard
         Media2Client media;
         UriBuilder deviceUri;
         MediaProfile[] profiles;
-        ConfigDashboard cd = new ConfigDashboard();
+        //ConfigDashboard cd;
+        ConfigParam cd;
         String[] prms = { };
 
         public ConnectCamera()
         {
             InitializeComponent();
+
+            create_profile_btn.IsEnabled = false;
 
             camera_name.GotFocus += InitTextbox;
             address.GotFocus += InitTextbox;
@@ -122,22 +125,7 @@ namespace ONVIF_MediaProfilDashboard
 
         private void OnConnect(object sender, RoutedEventArgs e)
         {
-            cd = new ConfigDashboard();
-            cd.vp = this.vp;
-            cd.ShowDialog();
-            bool res = cd.DialogResult;
-            if (res)
-            {
-                Console.WriteLine(cd.vp.Quality);
-                this.vp = cd.vp;
-            }
-            else
-            {
-                Console.WriteLine(cd.vp.Quality);
-            }
-
-
-            //ConnectCam();
+            ConnectCam();
         }
 
         private void ConnectCam()
@@ -171,56 +159,21 @@ namespace ONVIF_MediaProfilDashboard
                     media.ClientCredentials.HttpDigest.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     profiles = media.GetProfiles(null, null);
 
-                    // Take first token 
-                    VideoEncoder2Configuration[] videoEncode = media.GetVideoEncoderConfigurations(null, profiles[0].token);
-                    AudioEncoder2Configuration[] audioEncode = media.GetAudioEncoderConfigurations(null, profiles[0].token);
-
-                    VideoEncoder2ConfigurationOptions[]  options = media.GetVideoEncoderConfigurationOptions(null, profiles[0].token);
-
-                    videoEncode[0].Quality = 1;
-                    videoEncode[0].Resolution.Width = options[0].ResolutionsAvailable[14].Width;
-                    videoEncode[0].Resolution.Height = options[0].ResolutionsAvailable[14].Height;
-                    media.SetVideoEncoderConfiguration(videoEncode[0]);
-                    
-                    //profiles[0].Configurations.VideoEncoder = videoEncode[0];
-                    //profiles[0].Configurations.VideoEncoder.Quality = 1;
-                    //profiles[0].Configurations.VideoEncoder.Resolution.Height= 50;
-                    //profiles[0].Configurations.VideoEncoder.Resolution.Width = 50;
-                    //profiles[0].Configurations.VideoEncoder.RateControl.FrameRateLimit = 1;
-
-                    //ConfigurationRef config = profiles[0].Configurations;
-
-                    ConfigurationRef[] config = { new ConfigurationRef() };
-                    config[0].Token = videoEncode[0].token;
-
-                    media.AddConfiguration(profiles[0].token, "profile_1_h264", null);
-
-
-                    profiles = media.GetProfiles(null, null);
-
                     // Make sure that the list is empty before adding new items
                     listBox.Items.Clear();
-                    listBox.Items.Add(profiles[0].Name);
-                    /*if (profiles != null)
+                    //listBox.Items.Add(profiles[0].Name);
+                    if (profiles != null)
                         foreach (MediaProfile p in profiles)
-                        {
-                            if (p.Configurations!=null)
-                            {
-                                
-                                Console.WriteLine("Video Source :" + p.Configurations.VideoSource.ToString());
-                                Console.WriteLine("Video Encoder :" + p.Configurations.VideoEncoder.ToString());
-                                Console.WriteLine("Audio Source :" + p.Configurations.AudioSource.ToString());
-                                Console.WriteLine("Audio Encoder :" + p.Configurations.AudioEncoder.ToString());
-                            }
-                            
+                        {                            
                             listBox.Items.Add(p.Name);
-                        }*/
+                        }
                 }
                 listBox.SelectionChanged += OnSelectionChanged;
                 video.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
                 video.MediaPlayer.Log += MediaPlayer_Log;
                 video.MediaPlayer.EndInit();
-                
+                create_profile_btn.IsEnabled = true;
+
             }
             catch (Exception ex)
             {
@@ -310,8 +263,6 @@ namespace ONVIF_MediaProfilDashboard
             }
         }
 
-        internal VideoParam Vp { get => vp; set => vp = value; }
-
         private void StreamVideoOnVLC(String[] recordParams)
         {
             UriBuilder uri = new UriBuilder(media.GetStreamUri("RtspOverHttp", profiles[listBox.SelectedIndex].token));
@@ -336,6 +287,63 @@ namespace ONVIF_MediaProfilDashboard
             }
             
             video.MediaPlayer.Play(uri.Uri, options.ToArray());
+        }
+
+        private void create_profile_btn_Click(object sender, RoutedEventArgs e)
+        {
+            cd = new ConfigParam();
+            cd.MapValue(this.vp);
+            cd.ShowDialog();
+            bool res = cd.DialogResult;
+            if (res)
+            {
+                Console.WriteLine(cd.vp.Quality);
+                this.vp = cd.vp;
+            }
+            else
+            {
+                Console.WriteLine(cd.vp.Quality);
+            }
+
+            // Take first token 
+            profiles = media.GetProfiles(null, null);
+            VideoEncoder2Configuration[] videoEncode = media.GetVideoEncoderConfigurations(null, profiles[0].token);
+            VideoEncoder2ConfigurationOptions[] options = media.GetVideoEncoderConfigurationOptions(null, profiles[0].token);
+
+            videoEncode[0].Quality = this.vp.Quality;
+            videoEncode[0].Resolution.Width = this.vp.Width;
+            videoEncode[0].Resolution.Height = this.vp.Height;
+
+            ConfigurationRef[] config = { new ConfigurationRef() };
+            config[0].Token = videoEncode[0].token;
+            string name = profile_name.Text;
+            String token = media.CreateProfile(name, config);
+            
+
+            //profiles[0].Configurations.VideoEncoder = videoEncode[0];
+            //profiles[0].Configurations.VideoEncoder.Quality = 1;
+            //profiles[0].Configurations.VideoEncoder.Resolution.Height= 50;
+            //profiles[0].Configurations.VideoEncoder.Resolution.Width = 50;
+            //profiles[0].Configurations.VideoEncoder.RateControl.FrameRateLimit = 1;
+
+            //ConfigurationRef config = profiles[0].Configurations
+
+            
+
+            
+            Console.WriteLine("Create Profile");
+        }
+
+        private void profile_name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (profile_name.Text.Trim() != "")
+            {
+                create_profile_btn.IsEnabled = true;
+            }
+            else
+            {
+                create_profile_btn.IsEnabled = false;
+            }
         }
     }
 }
