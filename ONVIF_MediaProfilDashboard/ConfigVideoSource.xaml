@@ -1,0 +1,16 @@
+﻿<Window x:Class="ONVIF_MediaProfilDashboard.ConfigVideoSource"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
+        mc:Ignorable="d"
+        Title="Choose Video Source" Height="303.586" Width="396.681" FontSize="20">
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="ok_btn" Content="Ok" HorizontalAlignment="Left" Margin="94,216,0,0" VerticalAlignment="Top" Width="75" Click="ok_btn_Click" RenderTransformOrigin="1.627,0.452" FontSize="12"/>
+        <Button x:Name="cancel_btn" Content="Cancel" HorizontalAlignment="Left" Margin="223,216,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.627,0.452" FontSize="12" Click="cancel_btn_Click"/>
+        <Label Content="Configuration:" HorizontalAlignment="Left" Margin="60,30,0,0" VerticalAlignment="Top" FontSize="16" Height="33" Width="133"/>
+        <ComboBox x:Name="configs_cbox" HorizontalAlignment="Left" Margin="193,30,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
+        <TextBox x:Name="info_config" HorizontalAlignment="Left" Height="126" Margin="60,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" FontSize="12"/>
+    </Grid>
+</Window>

@@ -42,16 +42,19 @@ namespace ONVIF_MediaProfilDashboard
         Media2Client media;
         UriBuilder deviceUri;
         MediaProfile[] profiles;
-        //ConfigDashboard cd;
-        ConfigParam cd;
+        ConfigDashboard cd;
         String[] prms = { };
 
         public ConnectCamera()
         {
             InitializeComponent();
 
-            create_profile_btn.IsEnabled = false;
             delete_cam_btn.IsEnabled = false;
+        
+            // Manage profiles btn
+            create_profile_btn.IsEnabled = false;
+            modify_profile_btn.IsEnabled = false;
+            delete_profile_btn.IsEnabled = false;
 
             camera_name.GotFocus += InitTextbox;
             address.GotFocus += InitTextbox;
@@ -181,12 +184,14 @@ namespace ONVIF_MediaProfilDashboard
 
                     // Make sure that the list is empty before adding new items
                     listBox.Items.Clear();
-                    //listBox.Items.Add(profiles[0].Name);
                     if (profiles != null)
                         foreach (MediaProfile p in profiles)
                         {                            
                             listBox.Items.Add(p.Name);
                         }
+
+                    // Enable Manage Profile btn
+                    create_profile_btn.IsEnabled = true;
                 }
                 listBox.SelectionChanged += OnSelectionChanged;
                 video.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
@@ -199,6 +204,11 @@ namespace ONVIF_MediaProfilDashboard
                 inError = true;
 
             }
+            changeErrorLogColor(inError);
+        }
+
+        private void changeErrorLogColor(bool inError)
+        {
             if (inError)
             {
                 textBox.Foreground = new SolidColorBrush(Colors.Red);
@@ -256,7 +266,6 @@ namespace ONVIF_MediaProfilDashboard
             var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
             if (currentDirectory == null)
                 return;
-            // TO DO CHANGE PATH To VLC and onvifex
             if (IntPtr.Size == 4)
                 e.VlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(currentDirectory, vlcPath));
             else
@@ -268,7 +277,28 @@ namespace ONVIF_MediaProfilDashboard
         {
             if (profiles != null && listBox.SelectedIndex >= 0)
             {
-                StreamVideoOnVLC(prms);
+                bool inError = false;
+                try
+                {
+                    StreamVideoOnVLC(prms);
+                }
+                catch (Exception ex)
+                {
+                    textBox.Text = ex.Message;
+                    inError = true;
+                }
+                changeErrorLogColor(inError);
+
+
+                // Enable Modify and delete profiles
+                modify_profile_btn.IsEnabled = true;
+                delete_profile_btn.IsEnabled = true;
+            }
+            else
+            {
+                // Disable Modify and delete profiles
+                modify_profile_btn.IsEnabled = false;
+                delete_profile_btn.IsEnabled = false;
             }
         }
 
@@ -308,63 +338,6 @@ namespace ONVIF_MediaProfilDashboard
             video.MediaPlayer.Play(uri.Uri, options.ToArray());
         }
 
-        private void create_profile_btn_Click(object sender, RoutedEventArgs e)
-        {
-            cd = new ConfigParam();
-            cd.MapValue(this.vp);
-            cd.ShowDialog();
-            bool res = cd.DialogResult;
-            if (res)
-            {
-                Console.WriteLine(cd.vp.Quality);
-                this.vp = cd.vp;
-            }
-            else
-            {
-                Console.WriteLine(cd.vp.Quality);
-            }
-
-            // Take first token 
-            profiles = media.GetProfiles(null, null);
-            VideoEncoder2Configuration[] videoEncode = media.GetVideoEncoderConfigurations(null, profiles[0].token);
-            VideoEncoder2ConfigurationOptions[] options = media.GetVideoEncoderConfigurationOptions(null, profiles[0].token);
-
-            videoEncode[0].Quality = this.vp.Quality;
-            videoEncode[0].Resolution.Width = this.vp.Width;
-            videoEncode[0].Resolution.Height = this.vp.Height;
-
-            ConfigurationRef[] config = { new ConfigurationRef() };
-            config[0].Token = videoEncode[0].token;
-            string name = profile_name.Text;
-            String token = media.CreateProfile(name, config);
-            
-
-            //profiles[0].Configurations.VideoEncoder = videoEncode[0];
-            //profiles[0].Configurations.VideoEncoder.Quality = 1;
-            //profiles[0].Configurations.VideoEncoder.Resolution.Height= 50;
-            //profiles[0].Configurations.VideoEncoder.Resolution.Width = 50;
-            //profiles[0].Configurations.VideoEncoder.RateControl.FrameRateLimit = 1;
-
-            //ConfigurationRef config = profiles[0].Configurations
-
-            
-
-            
-            Console.WriteLine("Create Profile");
-        }
-
-        private void profile_name_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (profile_name.Text.Trim() != "")
-            {
-                create_profile_btn.IsEnabled = true;
-            }
-            else
-            {
-                create_profile_btn.IsEnabled = false;
-            }
-        }
-
         private void delete_cam_btn_Click(object sender, RoutedEventArgs e)
         {
             if (selectedCam == null || cameras == null)
@@ -391,6 +364,54 @@ namespace ONVIF_MediaProfilDashboard
             }
             LoadConnexion();
             delete_cam_btn.IsEnabled = false;
+        }
+
+        private void create_profile_btn_Click(object sender, RoutedEventArgs e)
+        {
+            cd = new ConfigDashboard();
+            cd.setMedia(media);
+            cd.ShowDialog();
+            bool res = cd.DialogResult;
+            if (res)
+            {
+                this.media = cd.media;
+                profiles = media.GetProfiles(null, null);
+
+                // Make sure that the list is empty before adding new items
+                listBox.Items.Clear();
+                if (profiles != null)
+                    foreach (MediaProfile p in profiles)
+                    {
+                        listBox.Items.Add(p.Name);
+                    }
+            }
+        }
+
+        private void modify_profile_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delete_profile_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Remove selected profile
+            if (listBox.SelectedIndex >= 0)
+            {
+                media.DeleteProfile(profiles[listBox.SelectedIndex].token);
+                profiles = media.GetProfiles(null, null);
+                refreshProfileList();
+                textBox.Text = "";
+            }
+        }
+
+        private void refreshProfileList()
+        {
+            listBox.Items.Clear();
+            if (profiles != null)
+                foreach (MediaProfile p in profiles)
+                {
+                    listBox.Items.Add(p.Name);
+                }
         }
     }
 }

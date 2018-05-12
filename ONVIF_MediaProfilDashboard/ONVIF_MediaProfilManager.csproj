@@ -77,12 +77,26 @@
     <Compile Include="ConfigDashboard.xaml.cs">
       <DependentUpon>ConfigDashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InfoOption.xaml.cs">
+      <DependentUpon>InfoOption.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigVideoSource.xaml.cs">
+      <DependentUpon>ConfigVideoSource.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VideoParam.cs" />
     <Page Include="ConfigDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ConfigParam.xaml">
+    <Page Include="InfoOption.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfigVideoSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfigVideoEncoder.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,8 +109,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CameraConnexion.cs" />
-    <Compile Include="ConfigParam.xaml.cs">
-      <DependentUpon>ConfigParam.xaml</DependentUpon>
+    <Compile Include="ConfigVideoEncoder.xaml.cs">
+      <DependentUpon>ConfigVideoEncoder.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConnectCamera.xaml.cs">
       <DependentUpon>ConnectCamera.xaml</DependentUpon>

@@ -5,22 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
-        Title="Media Profile Configuration DashBoard" Height="1195" Width="1000" FontSize="20">
-    <Grid>
+        Title="Media Profile Configuration DashBoard" Height="917.5" Width="1000" FontSize="20">
+    <Grid Margin="0,0,0,-111">
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="115*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="48*"/>
-            <ColumnDefinition Width="77*"/>
-            <ColumnDefinition Width="123*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="3" Fill="#FFB0B0B0" HorizontalAlignment="Left" Height="823" Margin="4,108,0,0" Stroke="Black" VerticalAlignment="Top" Width="618" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <TextBlock x:Name="Media_Profile_Title" Grid.Column="3" HorizontalAlignment="Left" Margin="218,137,0,0" TextWrapping="Wrap" Text="Media Profile" VerticalAlignment="Top" FontSize="36" Height="48" Width="211" Grid.ColumnSpan="2"/>
-        <Image Grid.ColumnSpan="4" Style="{DynamicResource ImageStyle1}" Margin="144,266,0,0" RenderTransformOrigin="0.74,0.74">
+        <Rectangle x:Name="media_profile_rect" Grid.Column="2" Fill="#FFB0B0B0" HorizontalAlignment="Left" Height="775" Margin="196,24,0,0" Stroke="Black" VerticalAlignment="Top" Width="618"/>
+        <TextBlock x:Name="Media_Profile_Title" Grid.Column="2" HorizontalAlignment="Left" Margin="410,53,0,0" TextWrapping="Wrap" Text="Media Profile" VerticalAlignment="Top" FontSize="36" Height="48" Width="211"/>
+        <Image Grid.ColumnSpan="3" Style="{DynamicResource ImageStyle1}" Margin="144,182,0,0" RenderTransformOrigin="0.74,0.74">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -36,8 +33,8 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,53,54" Background="#FFCBC6C6" Height="31" Width="110" Text="Video" TextAlignment="Center" RenderTransformOrigin="0.474,0.903"/>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="120,234,0,521" RenderTransformOrigin="0.74,0.74" Grid.Column="2" Grid.Row="1" Height="Auto" VerticalAlignment="Stretch">
+        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,853,762" Background="#FFCBC6C6" Height="31" Width="110" Text="Video" TextAlignment="Center" RenderTransformOrigin="0.474,0.903"/>
+        <Image Style="{DynamicResource ImageStyle1}" Margin="116,507,0,423" RenderTransformOrigin="0.74,0.74" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Width="55">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -61,17 +58,17 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,53,504" Background="#FFCBC6C6" Height="31" Width="110" Text="PTZ Control" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="2" Grid.Row="1"/>
-        <Button x:Name="metadata_btn" Content="" HorizontalAlignment="Left" Margin="28,373,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Row="1" Grid.Column="3" Click="metadata_btn_Click" />
-        <Button x:Name="ptz_btn" Content="" HorizontalAlignment="Left" Margin="28,208,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Row="1" Grid.Column="3" Click="ptz_btn_Click" />
-        <Button x:Name="audio_src_btn" Content="Audio&#xD;&#xA;Source Configuration" HorizontalAlignment="Left" Margin="14,28,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Row="1" Grid.Column="4" Click="audio_src_btn_Click"/>
-        <Button Content="Audio&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="28,28,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Row="1" Grid.Column="3" />
-        <Button x:Name="audio_encode_btn" Content="Audio&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="28,28,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Row="1" Grid.Column="3" Click="audio_encode_btn_Click" />
-        <Button x:Name="video_encode_btn" Content="Video&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="28,208,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="3" Click="video_encode_btn_Click" />
-        <Button x:Name="video_source_btn" Content="Video&#xA;Source Configuration" HorizontalAlignment="Left" Margin="14,208,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="4" Click="video_source_btn_Click" />
-        <Label Content="PTZ&#xD;&#xA;Configuration" Grid.Column="3" HorizontalAlignment="Left" Margin="60,243,0,0" Grid.Row="1" VerticalAlignment="Top" Height="73" Width="170"/>
-        <Label Content="Metadata&#xD;&#xA;Configuration" Grid.Column="3" HorizontalAlignment="Left" Margin="60,408,0,0" Grid.Row="1" VerticalAlignment="Top" Height="73" Width="170"/>
-        <Image Grid.ColumnSpan="4" Style="{DynamicResource ImageStyle1}" Margin="144,55,0,0" RenderTransformOrigin="0.74,0.74" Grid.Row="1">
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,853,410" Background="#FFCBC6C6" Height="31" Width="110" Text="PTZ Control" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="2"/>
+        <Button x:Name="metadata_btn" Content="" HorizontalAlignment="Left" Margin="220,651,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="metadata_btn_Click" />
+        <Button x:Name="ptz_btn" Content="" HorizontalAlignment="Left" Margin="220,486,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="ptz_btn_Click" />
+        <Button x:Name="audio_src_btn" Content="Audio&#xD;&#xA;Source Configuration" HorizontalAlignment="Left" Margin="514,306,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="audio_src_btn_Click"/>
+        <Button Content="Audio&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" />
+        <Button x:Name="audio_encode_btn" Content="Audio&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="audio_encode_btn_Click" />
+        <Button x:Name="video_encode_btn" Content="Video&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="220,124,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="video_encode_btn_Click" />
+        <Button x:Name="video_source_btn" Content="Video&#xA;Source Configuration" HorizontalAlignment="Left" Margin="514,124,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="video_source_btn_Click" />
+        <Label Content="PTZ&#xD;&#xA;Configuration" Grid.Column="2" HorizontalAlignment="Left" Margin="252,521,0,0" VerticalAlignment="Top" Height="73" Width="170"/>
+        <Label Content="Metadata&#xD;&#xA;Configuration" Grid.Column="2" HorizontalAlignment="Left" Margin="252,686,0,0" VerticalAlignment="Top" Height="73" Width="170"/>
+        <Image Grid.ColumnSpan="3" Style="{DynamicResource ImageStyle1}" Margin="144,333,0,0" RenderTransformOrigin="0.74,0.74">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -87,8 +84,8 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,53,706" Background="#FFCBC6C6" Height="31" Width="110" Text="Audio" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Row="1"/>
-        <Image Grid.ColumnSpan="4" Style="{DynamicResource ImageStyle1}" Margin="144,419,0,0" RenderTransformOrigin="0.74,0.74" Grid.Row="1">
+        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,853,612" Background="#FFCBC6C6" Height="31" Width="110" Text="Audio" TextAlignment="Center" RenderTransformOrigin="0.474,0.903"/>
+        <Image Grid.ColumnSpan="3" Style="{DynamicResource ImageStyle1}" Margin="144,697,0,0" RenderTransformOrigin="0.74,0.74">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -104,11 +101,11 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,53,254" Background="#FFCBC6C6" Height="119" Width="110" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.Row="1"><Run Text="Metadata" TextDecorations="Underline"/><LineBreak/><Run Text="Analytics"/><LineBreak/><Run Text="PTZ Status"/><LineBreak/><Run Text="Events"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="349,0,10,63" Background="#FFCBC6C6" Height="44" Width="133" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="4"><Run Text="Video"/><Run Text="Source"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="349,0,10,678" Background="#FFCBC6C6" Height="44" Width="133" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="4" Grid.Row="1"><Run Text="Audio"/><Run Text="Source"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="349,0,10,513" Background="#FFCBC6C6" Height="44" Width="133" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="4" Grid.Row="1" Text="PTZ Node"/>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="276,83,126,663" RenderTransformOrigin="0.74,0.74" Grid.Row="1" Grid.Column="4">
+        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,853,160" Background="#FFCBC6C6" Height="119" Width="110" TextAlignment="Center" RenderTransformOrigin="0.5,0.5"><Run Text="Metadata" TextDecorations="Underline"/><LineBreak/><Run Text="Analytics"/><LineBreak/><Run Text="PTZ Status"/><LineBreak/><Run Text="Events"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="849,0,10,772" Background="#FFCBC6C6" Height="44" Width="133" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="2"><Run Text="Video"/><Run Text="Source"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="849,0,10,564" Background="#FFCBC6C6" Height="44" Width="133" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="2"><Run Text="Audio"/><Run Text="Source"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="849,0,10,399" Background="#FFCBC6C6" Height="44" Width="133" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="2" Text="PTZ Node"/>
+        <Image Style="{DynamicResource ImageStyle1}" Margin="776,375,126,554" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -116,7 +113,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="276,257,126,48" RenderTransformOrigin="0.74,0.74" Grid.Column="4">
+        <Image Style="{DynamicResource ImageStyle1}" Margin="776,173,126,751" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -124,7 +121,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="276,243,126,503" RenderTransformOrigin="0.74,0.74" Grid.Row="1" Grid.Column="4">
+        <Image Style="{DynamicResource ImageStyle1}" Margin="776,542,126,389" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -132,7 +129,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="203,243,199,503" RenderTransformOrigin="0.74,0.74" Grid.Row="1" Grid.Column="4">
+        <Image Style="{DynamicResource ImageStyle1}" Margin="702,542,200,389" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -140,7 +137,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="131,243,271,503" RenderTransformOrigin="0.74,0.74" Grid.Row="1" Grid.Column="4">
+        <Image Style="{DynamicResource ImageStyle1}" Margin="634,542,268,389" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -148,7 +145,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="58,243,344,503" RenderTransformOrigin="0.74,0.74" Grid.Row="1" Grid.Column="4">
+        <Image Style="{DynamicResource ImageStyle1}" Margin="559,542,343,389" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -156,7 +153,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Image Style="{DynamicResource ImageStyle1}" Margin="293,243,417,503" RenderTransformOrigin="0.74,0.74" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2">
+        <Image Style="{DynamicResource ImageStyle1}" Margin="487,542,415,389" RenderTransformOrigin="0.74,0.74" Grid.Column="2">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="assets/img/dash-line.png"/>
@@ -164,7 +161,7 @@
                 </Style>
             </Image.Resources>
         </Image>
-        <Button x:Name="save_btn" Content="OK" Grid.Column="3" HorizontalAlignment="Left" Margin="60,673,0,0" Grid.Row="1" VerticalAlignment="Top" Width="159" Height="55"/>
-        <Button x:Name="cancel_btn" Content="Cancel" Grid.Column="4" HorizontalAlignment="Left" Margin="82,673,0,0" Grid.Row="1" VerticalAlignment="Top" Width="159" Height="55"/>
+        <Button x:Name="save_btn" Content="OK" Grid.Column="2" HorizontalAlignment="Left" Margin="263,816,0,0" VerticalAlignment="Top" Width="159" Height="56" Click="save_btn_Click"/>
+        <Button x:Name="cancel_btn" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="594,816,0,0" VerticalAlignment="Top" Width="158" Height="55" Click="cancel_btn_Click"/>
     </Grid>
 </Window>
