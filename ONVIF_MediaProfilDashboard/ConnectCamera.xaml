@@ -6,21 +6,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf" 
 		mc:Ignorable="d"
-        Title="Connect" Height="743.025" Width="1029.5">
+        Title="Connect" Height="751.025" Width="1083.1">
     <Grid Margin="0,0,2,-1">
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="190" Margin="10,156,0,0" VerticalAlignment="Top" Width="109"/>
-        <TextBox x:Name="textBox" Margin="124,0,13,12" TextWrapping="Wrap" Height="88" VerticalAlignment="Bottom"/>
-        <vlc:VlcControl x:Name="video" Margin="124,47,13,105"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="190" Margin="10,173,0,0" VerticalAlignment="Top" Width="109"/>
+        <TextBox x:Name="textBox" Margin="124,0,13,12" TextWrapping="Wrap" Height="63" VerticalAlignment="Bottom"/>
+        <vlc:VlcControl x:Name="video" Margin="124,47,13,80"/>
         <TextBox x:Name="address" HorizontalAlignment="Left" Height="27" Margin="518,15,0,0" TextWrapping="Wrap" Text="195.60.68.239" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
         <TextBox x:Name="user" HorizontalAlignment="Left" Height="27" Margin="702,15,0,0" TextWrapping="Wrap" Text="operator" VerticalAlignment="Top" Width="150"/>
         <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="27" Margin="857,15,0,0" VerticalAlignment="Top" Width="150" Password="Onv!f2018"/>
         <Button x:Name="button" Content="Connect" HorizontalAlignment="Left" Margin="229,15,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.405,-0.212" Height="27"/>
-        <Label Content="Saved Camera" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,1.115"/>
-        <Label Content="Profiles Available" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.24,12.308"/>
+        <Label Content="Saved Camera" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,1.115"/>
+        <Label Content="Profiles Available" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.24,12.308"/>
         <Button x:Name="save_btn" Content="Save" HorizontalAlignment="Left" Margin="124,15,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.405,-0.212" Height="27"/>
         <TextBox x:Name="camera_name" HorizontalAlignment="Left" Height="27" Margin="334,15,0,0" TextWrapping="Wrap" Text="Awesome Camera" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
-        <ListBox x:Name="listBox_saved" HorizontalAlignment="Left" Height="204" Margin="10,391,0,0" VerticalAlignment="Top" Width="109"/>
+        <ListBox x:Name="listBox_saved" HorizontalAlignment="Left" Height="204" Margin="10,399,0,0" VerticalAlignment="Top" Width="109"/>
         <Button x:Name="create_profile_btn" Content="Create Profile" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="27" Click="create_profile_btn_Click"/>
-        <TextBox x:Name="profile_name" HorizontalAlignment="Left" Height="27" Margin="10,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.888,0.704" TextChanged="profile_name_TextChanged"/>
+        <TextBox x:Name="profile_name" HorizontalAlignment="Left" Height="27" Margin="10,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.888,0.704" TextChanged="profile_name_TextChanged"/>
+        <Label Content="Info Logger :" HorizontalAlignment="Left" Margin="37,646,0,0" VerticalAlignment="Top" Height="33" Width="82"/>
+        <Button x:Name="delete_cam_btn" Content="Delete Saved Cam" HorizontalAlignment="Left" Margin="10,608,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="33" Click="delete_cam_btn_Click"/>
+        <Label Content="Profile Name :" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.24,12.308"/>
     </Grid>
 </Window>

@@ -28,7 +28,32 @@ namespace ONVIF_MediaProfilDashboard
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void video_encode_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void video_source_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void audio_encode_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void audio_src_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ptz_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void metadata_btn_Click(object sender, RoutedEventArgs e)
         {
 
         }

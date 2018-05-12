@@ -26,8 +26,15 @@ namespace ONVIF_MediaProfilDashboard
     /// </summary>
     public partial class ConnectCamera : Window
     {
+
+        // TO CHANGE 
+        // VLC and Onvifex path
+        string vlcPath = @"d:\Programs File\VLC\";
+        string onvifexPath = @"D:\temp\src\onvifex\Vlc.DotNet-develop\lib\x64";
+
         int previousSavedConnIndex = -1;
         List<CameraConnexion> cameras = new List<CameraConnexion>();
+        CameraConnexion selectedCam = null;
         String path_to_connexion_file = AppDomain.CurrentDomain.BaseDirectory + @"\login_info.json";
 
         VideoParam vp = new VideoParam();
@@ -44,6 +51,7 @@ namespace ONVIF_MediaProfilDashboard
             InitializeComponent();
 
             create_profile_btn.IsEnabled = false;
+            delete_cam_btn.IsEnabled = false;
 
             camera_name.GotFocus += InitTextbox;
             address.GotFocus += InitTextbox;
@@ -59,11 +67,13 @@ namespace ONVIF_MediaProfilDashboard
         {
             if (cameras != null && listBox_saved.SelectedIndex >= 0)
             {
-                CameraConnexion cm = cameras.ElementAt(listBox_saved.SelectedIndex);
-                address.Text = cm.Address;
-                password.Password = cm.Password;
-                user.Text = cm.User;
-                camera_name.Text = cm.CameraName;
+                selectedCam = cameras.ElementAt(listBox_saved.SelectedIndex);
+                address.Text = selectedCam.Address;
+                password.Password = selectedCam.Password;
+                user.Text = selectedCam.User;
+                camera_name.Text = selectedCam.CameraName;
+                // Can be Deleted
+                delete_cam_btn.IsEnabled = true;
 
                 if (previousSavedConnIndex == listBox_saved.SelectedIndex)
                 {
@@ -106,7 +116,17 @@ namespace ONVIF_MediaProfilDashboard
                 {
                     cameras = new List<CameraConnexion>();
                 }
-                cameras.Add(cc);
+                // override camera if is already saved with same name
+                int index = cameras.FindIndex(element => element.CameraName.Equals(cc.CameraName));
+                if (index == -1)
+                {
+                    cameras.Add(cc);
+                }
+                else
+                {
+                    cameras[index] = cc;
+                }
+                
                 string json = JsonConvert.SerializeObject(cameras);
                 if (!File.Exists(path_to_connexion_file))
                 {
@@ -172,8 +192,6 @@ namespace ONVIF_MediaProfilDashboard
                 video.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
                 video.MediaPlayer.Log += MediaPlayer_Log;
                 video.MediaPlayer.EndInit();
-                create_profile_btn.IsEnabled = true;
-
             }
             catch (Exception ex)
             {
@@ -238,10 +256,11 @@ namespace ONVIF_MediaProfilDashboard
             var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
             if (currentDirectory == null)
                 return;
+            // TO DO CHANGE PATH To VLC and onvifex
             if (IntPtr.Size == 4)
-                e.VlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"d:\Programs File\VLC\"));
+                e.VlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(currentDirectory, vlcPath));
             else
-                e.VlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"D:\temp\src\onvifex\Vlc.DotNet-develop\lib\x64"));
+                e.VlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(currentDirectory, onvifexPath));
         }
 
 
@@ -344,6 +363,34 @@ namespace ONVIF_MediaProfilDashboard
             {
                 create_profile_btn.IsEnabled = false;
             }
+        }
+
+        private void delete_cam_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedCam == null || cameras == null)
+            {
+                delete_cam_btn.IsEnabled = false;
+                return;
+            }
+            // Remove Camera login info
+            int index = cameras.FindIndex(element => element.CameraName.Equals(selectedCam.CameraName));
+            if (index >= 0)
+            {
+                cameras.RemoveAt(index);
+            }
+
+            string json = JsonConvert.SerializeObject(cameras);
+            if (!File.Exists(path_to_connexion_file))
+            {
+                File.CreateText(path_to_connexion_file).Close();
+            }
+            using (StreamWriter file = new StreamWriter(path_to_connexion_file, false))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, cameras);
+            }
+            LoadConnexion();
+            delete_cam_btn.IsEnabled = false;
         }
     }
 }
