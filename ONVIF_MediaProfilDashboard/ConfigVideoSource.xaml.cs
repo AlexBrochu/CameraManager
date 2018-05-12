@@ -29,12 +29,14 @@ namespace ONVIF_MediaProfilDashboard
         public Media2Client media;
         public string token;
         public new bool DialogResult { get; private set; }
+        InfoOption io;
 
         int selectedIndex = 0;
 
         public ConfigVideoSource()
         {
             InitializeComponent();
+            this.Closing += Window_Closing;
         }
 
         internal void setMedia(Media2Client media)
@@ -76,6 +78,22 @@ namespace ONVIF_MediaProfilDashboard
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedIndex = configs_cbox.SelectedIndex;
+            info_config.Text = JsonConvert.SerializeObject(configs[selectedIndex], Formatting.Indented);
+        }
+
+        private void show_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string configsStr = JsonConvert.SerializeObject(configs, Formatting.Indented);
+            io = new InfoOption(configsStr);
+            io.Show();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (io != null)
+            {
+                io.Close();
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ namespace ONVIF_MediaProfilDashboard
 
         VideoEncoder2Configuration[] configs;
         int selectedIndex;
+        InfoOption io;
 
         public new bool DialogResult { get; private set; }
 
@@ -39,6 +40,8 @@ namespace ONVIF_MediaProfilDashboard
             InitializeComponent();
             this.media = media;
             this.profileToken = token;
+
+            this.Closing += Window_Closing;
 
             configs = media.GetVideoEncoderConfigurations(null, profileToken);
             setComboxItem();
@@ -73,26 +76,27 @@ namespace ONVIF_MediaProfilDashboard
             }
             configs_cbox.ItemsSource = data;
             configs_cbox.SelectedItem = configs_cbox.Items.GetItemAt(0);
-            info_config.Text = ConvertConfig(configs[selectedIndex]);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedIndex = configs_cbox.SelectedIndex;
-            info_config.Text = ConvertConfig(configs[selectedIndex]);
-        }
-
-        private string ConvertConfig(VideoEncoder2Configuration vsc)
-        {
-            string infos = JsonConvert.SerializeObject(vsc, Formatting.Indented);
-            return infos;
+            info_config.Text = JsonConvert.SerializeObject(configs[selectedIndex], Formatting.Indented);
         }
 
         private void show_btn_Click(object sender, RoutedEventArgs e)
         {
             string configsStr = JsonConvert.SerializeObject(configs, Formatting.Indented);
-            InfoOption io = new InfoOption(configsStr);
+            io = new InfoOption(configsStr);
             io.Show();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (io != null)
+            {
+                io.Close();
+            }
         }
     }
 }
