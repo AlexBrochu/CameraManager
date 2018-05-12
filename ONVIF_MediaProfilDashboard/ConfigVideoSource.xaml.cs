@@ -27,15 +27,18 @@ namespace ONVIF_MediaProfilDashboard
     {
         VideoSourceConfiguration[] configs;
         public Media2Client media;
-        public string token;
+        public string profileToken;
         public new bool DialogResult { get; private set; }
         InfoOption io;
+
+        bool useProfileToken = false;
 
         int selectedIndex = 0;
 
         public ConfigVideoSource()
         {
             InitializeComponent();
+            // handle closing event
             this.Closing += Window_Closing;
         }
 
@@ -62,8 +65,16 @@ namespace ONVIF_MediaProfilDashboard
             ConfigurationRef[] config = { new ConfigurationRef() };
             config[0].Type = "VideoSource";
             config[0].Token = configs[selectedIndex].token;
-            string name = "new profile";
-            token = media.CreateProfile(name, config);
+
+            if (!useProfileToken)
+            {    
+                string name = "new profile";
+                profileToken = media.CreateProfile(name, config);
+            }
+            else
+            {
+                media.AddConfiguration(profileToken, null, config);
+            }
 
             this.DialogResult = true;
             this.Close();

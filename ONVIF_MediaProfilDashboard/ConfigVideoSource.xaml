@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
-        Title="Choose Video Source" Height="303.586" Width="396.681" FontSize="20">
+        Title="Choose Video Source" Height="385.506" Width="410.449" FontSize="20">
     <Grid RenderTransformOrigin="0.5,0.5">
-        <Button x:Name="ok_btn" Content="Ok" HorizontalAlignment="Right" Margin="0,0,230,10" VerticalAlignment="Bottom" Width="80" Click="ok_btn_Click" RenderTransformOrigin="1.627,0.452" FontSize="16" Height="26"/>
-        <Button x:Name="cancel_btn" Content="Cancel" Margin="0,0,85,10" VerticalAlignment="Bottom" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="cancel_btn_Click" HorizontalAlignment="Right" Width="79" Height="26"/>
+        <Button x:Name="ok_btn" Content="Ok" HorizontalAlignment="Right" Margin="0,0,243,10" VerticalAlignment="Bottom" Width="80" Click="ok_btn_Click" RenderTransformOrigin="1.627,0.452" FontSize="16" Height="26"/>
+        <Button x:Name="cancel_btn" Content="Cancel" Margin="0,0,69,10" VerticalAlignment="Bottom" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="cancel_btn_Click" HorizontalAlignment="Right" Width="79" Height="26"/>
         <Label Content="Configuration:" HorizontalAlignment="Left" Margin="26,30,0,0" VerticalAlignment="Top" FontSize="16" Height="33" Width="133"/>
-        <ComboBox x:Name="configs_cbox" HorizontalAlignment="Right" Margin="0,0,119,210" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
-        <TextBox x:Name="info_config" HorizontalAlignment="Left" Height="154" Margin="10,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="369" FontSize="12"/>
-        <Button x:Name="show_btn" Content="Show Config" HorizontalAlignment="Right" Margin="0,0,10,209" VerticalAlignment="Bottom" Width="96" RenderTransformOrigin="1.627,0.452" FontSize="16" Height="33" Click="show_btn_Click"/>
+        <ComboBox x:Name="configs_cbox" HorizontalAlignment="Left" Margin="159,0,0,292" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
+        <TextBox x:Name="info_config" HorizontalAlignment="Right" Height="246" Margin="0,0,10,41" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="382" FontSize="12"/>
+        <Button x:Name="show_btn" Content="Show Config" HorizontalAlignment="Left" Margin="296,0,0,292" VerticalAlignment="Bottom" Width="96" RenderTransformOrigin="1.627,0.452" FontSize="16" Height="33" Click="show_btn_Click"/>
     </Grid>
 </Window>

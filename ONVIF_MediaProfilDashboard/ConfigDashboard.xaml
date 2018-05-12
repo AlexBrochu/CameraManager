@@ -59,15 +59,13 @@
             </Image.RenderTransform>
         </Image>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="29,0,853,410" Background="#FFCBC6C6" Height="31" Width="110" Text="PTZ Control" TextAlignment="Center" RenderTransformOrigin="0.474,0.903" Grid.Column="2"/>
-        <Button x:Name="metadata_btn" Content="" HorizontalAlignment="Left" Margin="220,651,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="metadata_btn_Click" />
-        <Button x:Name="ptz_btn" Content="" HorizontalAlignment="Left" Margin="220,486,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="ptz_btn_Click" />
+        <Button x:Name="metadata_btn" Content="Metadata&#xD;&#xA;Configuration" HorizontalAlignment="Left" Margin="220,651,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="metadata_btn_Click" />
+        <Button x:Name="ptz_btn" Content="PTZ&#xD;&#xA;Configuration" HorizontalAlignment="Left" Margin="220,486,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="ptz_btn_Click" />
         <Button x:Name="audio_src_btn" Content="Audio&#xD;&#xA;Source Configuration" HorizontalAlignment="Left" Margin="514,306,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="audio_src_btn_Click"/>
         <Button Content="Audio&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" />
         <Button x:Name="audio_encode_btn" Content="Audio&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="audio_encode_btn_Click" />
         <Button x:Name="video_encode_btn" Content="Video&#xA;Encoder Configuration" HorizontalAlignment="Left" Margin="220,124,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="video_encode_btn_Click" />
         <Button x:Name="video_source_btn" Content="Video&#xA;Source Configuration" HorizontalAlignment="Left" Margin="514,124,0,0" VerticalAlignment="Top" Width="262" Height="132" Grid.Column="2" Click="video_source_btn_Click" />
-        <Label Content="PTZ&#xD;&#xA;Configuration" Grid.Column="2" HorizontalAlignment="Left" Margin="252,521,0,0" VerticalAlignment="Top" Height="73" Width="170"/>
-        <Label Content="Metadata&#xD;&#xA;Configuration" Grid.Column="2" HorizontalAlignment="Left" Margin="252,686,0,0" VerticalAlignment="Top" Height="73" Width="170"/>
         <Image Grid.ColumnSpan="3" Style="{DynamicResource ImageStyle1}" Margin="144,333,0,0" RenderTransformOrigin="0.74,0.74">
             <Image.Resources>
                 <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">

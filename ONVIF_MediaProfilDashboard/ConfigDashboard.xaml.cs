@@ -26,6 +26,7 @@ namespace ONVIF_MediaProfilDashboard
     {
         public Media2Client media;
         MediaProfile[] profiles;
+        string profileToken;
         
 
         public new bool DialogResult { get; private set; }
@@ -34,11 +35,33 @@ namespace ONVIF_MediaProfilDashboard
         ConfigVideoEncoder cve;
         ConfigVideoSource cvs;
 
+        List<Button> allButtons = new List<Button>();
+
         public ConfigDashboard()
         {
             InitializeComponent();
 
             media_profile_rect.Fill = new SolidColorBrush(System.Windows.Media.Colors.AliceBlue);
+
+            allButtons.Add(video_source_btn);
+            allButtons.Add(video_encode_btn);
+            allButtons.Add(audio_src_btn);
+            allButtons.Add(audio_encode_btn);
+            allButtons.Add(ptz_btn);
+            allButtons.Add(metadata_btn);
+            disableAllBtn();
+
+            // Video is the first step of config
+            video_source_btn.IsEnabled = true;
+            video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+        }
+
+        private void disableAllBtn()
+        {
+            foreach (Button btn in allButtons)
+            {
+                btn.IsEnabled = false;
+            }
         }
 
         private void video_encode_btn_Click(object sender, RoutedEventArgs e)
@@ -53,16 +76,23 @@ namespace ONVIF_MediaProfilDashboard
                 this.media = cve.media;
 
                 video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
-            }
-            else
-            {
-                video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                // Next btn to active
+                audio_src_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                audio_src_btn.IsEnabled = true;
             }
         }
 
         private void video_source_btn_Click(object sender, RoutedEventArgs e)
         {
-            cvs = new ConfigVideoSource();
+            if (this.profileToken != null)
+            {
+                cvs = new ConfigVideoSource();
+                cvs.profileToken = this.profileToken;
+            }
+            else
+            {
+                cvs = new ConfigVideoSource();
+            }
 
             cvs.setMedia(media);
             cvs.ShowDialog();
@@ -72,13 +102,13 @@ namespace ONVIF_MediaProfilDashboard
             if (res)
             {
                 this.media = cvs.media;
-                profiles = media.GetProfiles(this.cvs.token, new string[]{ "All" });
+                this.profileToken = this.cvs.profileToken;
+                profiles = media.GetProfiles(this.profileToken, new string[]{ "All" });
 
                 video_source_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
-            }
-            else
-            {
-                video_source_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                // Next btn to active
+                video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                video_encode_btn.IsEnabled = true;
             }
         }
 
