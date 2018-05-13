@@ -6,7 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf" 
 		mc:Ignorable="d"
-        ResizeMode="NoResize"
         Title="Connect" Height="751.025" Width="1083.1">
     <Grid Margin="0,0,2,-1">
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="190" Margin="10,173,0,0" VerticalAlignment="Top" Width="109"/>
@@ -22,7 +21,7 @@
         <TextBox x:Name="camera_name" HorizontalAlignment="Left" Height="27" Margin="334,15,0,0" TextWrapping="Wrap" Text="Awesome Camera" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
         <ListBox x:Name="listBox_saved" HorizontalAlignment="Left" Height="204" Margin="10,399,0,0" VerticalAlignment="Top" Width="109"/>
         <Button x:Name="create_profile_btn" Content="Create Profile" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="27" Click="create_profile_btn_Click"/>
-        <Label Content="Info Logger :" HorizontalAlignment="Left" Margin="37,0,0,42" VerticalAlignment="Bottom" Height="33" Width="82"/>
+        <Label Content="Info Logger :" HorizontalAlignment="Left" Margin="37,0,0,25" VerticalAlignment="Bottom" Height="33" Width="82"/>
         <Button x:Name="delete_cam_btn" Content="Delete Saved Cam" HorizontalAlignment="Left" Margin="10,608,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="33" Click="delete_cam_btn_Click"/>
         <Button x:Name="modify_profile_btn" Content="Modify Profile" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="27" Click="modify_profile_btn_Click"/>
         <Button x:Name="delete_profile_btn" Content="Delete Profile" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="27" Click="delete_profile_btn_Click"/>

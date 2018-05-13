@@ -74,8 +74,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigAudioEncoder.xaml.cs">
+      <DependentUpon>ConfigAudioEncoder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfigDashboard.xaml.cs">
       <DependentUpon>ConfigDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigAudioSource.xaml.cs">
+      <DependentUpon>ConfigAudioSource.xaml</DependentUpon>
     </Compile>
     <Compile Include="InfoOption.xaml.cs">
       <DependentUpon>InfoOption.xaml</DependentUpon>
@@ -84,7 +90,15 @@
       <DependentUpon>ConfigVideoSource.xaml</DependentUpon>
     </Compile>
     <Compile Include="VideoParam.cs" />
+    <Page Include="ConfigAudioEncoder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ConfigDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfigAudioSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

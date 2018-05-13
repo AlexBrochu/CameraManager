@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
-        Title="Show Options" Height="422.392" Width="447.417" FontSize="20">
+        Title="Show Options" Height="586.763" Width="520.25" FontSize="20">
     <Grid RenderTransformOrigin="0.5,0.5">
-        <Button x:Name="close_btn" Content="Close" Margin="142,0,172,10" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="close_btn_Click" Height="34" VerticalAlignment="Bottom"/>
-        <Label Content="Options Details:" HorizontalAlignment="Left" Margin="222,20,0,0" VerticalAlignment="Top" FontSize="16" Height="34" Width="192"/>
-        <TextBox x:Name="options_txt" Margin="222,59,25,73" TextWrapping="Wrap" FontSize="12"/>
-        <ListBox x:Name="list_options_name" Margin="27,59,237,73" SelectionChanged="list_options_name_SelectionChanged"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="149*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="close_btn" Content="Close" Margin="157,0,157,10" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="close_btn_Click" Height="34" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <Label Content="Options Available (ReadOnly):" HorizontalAlignment="Left" Margin="8,20,0,0" VerticalAlignment="Top" FontSize="16" Height="34" Width="230" Grid.Column="1"/>
+        <TextBox x:Name="options_txt" Margin="8,59,25,73" TextWrapping="Wrap" FontSize="12" Grid.Column="1"/>
+        <ListBox x:Name="list_options_name" Margin="27,59,11,73" SelectionChanged="list_options_name_SelectionChanged"/>
         <Label Content="Option Name:" HorizontalAlignment="Left" Margin="27,20,0,0" VerticalAlignment="Top" FontSize="16" Height="34" Width="161"/>
     </Grid>
 </Window>

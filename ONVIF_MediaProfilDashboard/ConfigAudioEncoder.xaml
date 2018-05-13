@@ -1,11 +1,11 @@
-﻿<Window x:Class="ONVIF_MediaProfilDashboard.ConfigVideoSource"
+﻿<Window x:Class="ONVIF_MediaProfilDashboard.ConfigAudioEncoder"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
-        Title="Choose Video Source" Height="397.967" Width="428.063" FontSize="20">
+        Title="Choose Audio Encoder" Height="409.363" Width="418.792" FontSize="20">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="217*"/>
@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="ok_btn" Content="Ok" Margin="87,0,50,10" Click="ok_btn_Click" RenderTransformOrigin="1.627,0.452" FontSize="16" Height="26" VerticalAlignment="Bottom"/>
         <Button x:Name="cancel_btn" Content="Cancel" Margin="45,0,69,10" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="cancel_btn_Click" Height="26" VerticalAlignment="Bottom" Grid.Column="1"/>
-        <Label Content="Configuration:" Margin="26,30,69,0" FontSize="16" Height="35" VerticalAlignment="Top"/>
+        <Label Content="Configuration:" Margin="26,30,0,0" FontSize="16" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="122"/>
         <ComboBox x:Name="configs_cbox" HorizontalAlignment="Left" Margin="148,33,0,0" Width="120" SelectionChanged="ComboBox_SelectionChanged" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="2" />
         <TextBox x:Name="info_config" Margin="18,71,20,41" TextWrapping="Wrap" FontSize="12" Grid.ColumnSpan="2"/>
         <Button x:Name="show_btn" Content="Show Config" Margin="66,33,20,0" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="show_btn_Click" Height="33" VerticalAlignment="Top" Grid.Column="1"/>

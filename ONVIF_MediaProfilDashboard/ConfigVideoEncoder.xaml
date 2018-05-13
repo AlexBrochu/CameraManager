@@ -5,19 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
-        Title="Configure Video Encoder" Height="423.301" Width="449.945" FontSize="20">
+        Title="Configure Video Encoder" Height="467.301" Width="445.945" FontSize="20">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="219*"/>
             <ColumnDefinition Width="223*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="ok_btn" Content="Ok" HorizontalAlignment="Right" Margin="0,354,64,0" VerticalAlignment="Top" Width="75" Click="ok_btn_Click" RenderTransformOrigin="1.627,0.452" FontSize="16"/>
-        <Button x:Name="cancel_btn" Content="Cancel" HorizontalAlignment="Right" Margin="0,354,86,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="cancel_btn_Click" Grid.Column="1"/>
-        <Label Content="Video Encoder :" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" FontSize="14" Height="27" Width="111"/>
+        <Button x:Name="ok_btn" Content="Ok" Margin="43,0,46,12" Click="ok_btn_Click" RenderTransformOrigin="1.627,0.452" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
+        <Button x:Name="cancel_btn" Content="Cancel" Margin="53,0,47,12" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="cancel_btn_Click" Grid.Column="1" Height="25" VerticalAlignment="Bottom"/>
+        <Label Content="Video Encoder :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Height="27" Width="130"/>
         <ComboBox x:Name="configs_cbox" HorizontalAlignment="Left" Margin="161,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" FontSize="16" RenderTransformOrigin="0.139,0.484" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="info_config" Height="295" Margin="10,0,0,49" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="12" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="422"/>
-        <Button x:Name="show_btn" Content="Show Config" HorizontalAlignment="Right" Margin="0,0,10,355" VerticalAlignment="Bottom" Width="135" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="show_btn_Click" Grid.Column="1" Height="27"/>
+        <TextBox x:Name="info_config" Margin="10,48,10,49" TextWrapping="Wrap" FontSize="12" Grid.ColumnSpan="2"/>
+        <Button x:Name="show_btn" Content="Show Config" Margin="78,10,10,0" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="show_btn_Click" Grid.Column="1" Height="27" VerticalAlignment="Top"/>
     </Grid>
 </Window>

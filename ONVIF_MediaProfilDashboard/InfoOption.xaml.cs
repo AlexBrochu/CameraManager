@@ -26,26 +26,47 @@ namespace ONVIF_MediaProfilDashboard
     /// </summary>
     public partial class InfoOption : Window
     {
-        int selectedIndex = 0;
         JArray optionsArray;
+        JObject options;
 
         public InfoOption(string options)
         {
             InitializeComponent();
             options_txt.IsReadOnly = true;
-            optionsArray = JArray.Parse(options);
-            options_txt.Text = optionsArray[selectedIndex].ToString();
+
+            // Converting string to json object
+            try
+            {
+                this.options = JObject.Parse(options);
+            }
+            // if fails try json array
+            catch (Exception ex)
+            {
+                this.options = null;
+                this.optionsArray = JArray.Parse(options);
+            }
+                        
+            options_txt.Text = options;
             LoadOptionsName();
         }
 
         private void LoadOptionsName()
         {
             list_options_name.Items.Clear();
+            if (options != null)
+            {
+                list_options_name.Items.Add("option 1");
+            }
+
             if (optionsArray != null)
+            {
+                int index = 1;
                 foreach (var option in optionsArray)
                 {
-                    list_options_name.Items.Add(option["Name"]);
+                    list_options_name.Items.Add("option " + index);
+                    index++;
                 }
+            }
         }
 
         private void close_btn_Click(object sender, RoutedEventArgs e)
@@ -55,8 +76,8 @@ namespace ONVIF_MediaProfilDashboard
 
         private void list_options_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedIndex = list_options_name.SelectedIndex;
-            if (list_options_name.SelectedIndex >= 0)
+            int selectedIndex = list_options_name.SelectedIndex;
+            if (list_options_name.SelectedIndex >= 0 && optionsArray != null)
             {
                 options_txt.Text = optionsArray[selectedIndex].ToString();
             }

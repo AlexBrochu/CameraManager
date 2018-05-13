@@ -29,8 +29,8 @@ namespace ONVIF_MediaProfilDashboard
 
         // TO CHANGE 
         // VLC and Onvifex path
-        string vlcPath = @"d:\Programs File\VLC\";
-        string onvifexPath = @"D:\temp\src\onvifex\Vlc.DotNet-develop\lib\x64";
+        string vlcPath = Properties.Resources.VLCPath;
+        string onvifexPath = Properties.Resources.ONVIFEXPath;
 
         int previousSavedConnIndex = -1;
         List<CameraConnexion> cameras = new List<CameraConnexion>();
@@ -368,7 +368,8 @@ namespace ONVIF_MediaProfilDashboard
 
         private void create_profile_btn_Click(object sender, RoutedEventArgs e)
         {
-            cd = new ConfigDashboard();
+            bool createMode = true;
+            cd = new ConfigDashboard(createMode);
             cd.setMedia(media);
             cd.ShowDialog();
             bool res = cd.DialogResult;
@@ -389,7 +390,7 @@ namespace ONVIF_MediaProfilDashboard
 
         private void modify_profile_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            // TODO
         }
 
         private void delete_profile_btn_Click(object sender, RoutedEventArgs e)

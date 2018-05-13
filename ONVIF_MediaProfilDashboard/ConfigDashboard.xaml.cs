@@ -27,23 +27,29 @@ namespace ONVIF_MediaProfilDashboard
         public Media2Client media;
         MediaProfile[] profiles;
         string profileToken;
-        
+        bool isCreateMode = true;
 
         public new bool DialogResult { get; private set; }
 
         // All config Screen
         ConfigVideoEncoder cve;
         ConfigVideoSource cvs;
+        ConfigAudioSource cas;
+        ConfigAudioEncoder cae;
 
         List<Button> allButtons = new List<Button>();
         List<bool> btnState = new List<bool>();
         string profileName;
 
-        public ConfigDashboard()
+        public ConfigDashboard(bool isCreateMode)
         {
             InitializeComponent();
 
+            this.isCreateMode = isCreateMode;
+
             media_profile_rect.Fill = new SolidColorBrush(System.Windows.Media.Colors.AliceBlue);
+
+            save_btn.IsEnabled = false;
 
             // Fill list of btn
             allButtons.Add(video_source_btn);
@@ -110,6 +116,8 @@ namespace ONVIF_MediaProfilDashboard
                 // Next btn to active
                 audio_src_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
                 audio_src_btn.IsEnabled = true;
+
+                save_btn.IsEnabled = true;
             }
         }
 
@@ -145,22 +153,48 @@ namespace ONVIF_MediaProfilDashboard
 
         private void audio_encode_btn_Click(object sender, RoutedEventArgs e)
         {
+            cae = new ConfigAudioEncoder(media, this.profiles[0].token, profileName);
+            cae.ShowDialog();
+            bool res = cae.DialogResult;
 
+            // Done
+            if (res)
+            {
+                this.media = cae.media;
+
+                audio_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
+                // Next btn to active
+                ptz_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                ptz_btn.IsEnabled = true;
+            }
         }
 
         private void audio_src_btn_Click(object sender, RoutedEventArgs e)
         {
+            cas = new ConfigAudioSource(media, this.profiles[0].token, profileName);
+            cas.ShowDialog();
+            bool res = cas.DialogResult;
 
+            // Done
+            if (res)
+            {
+                this.media = cas.media;
+
+                audio_src_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
+                // Next btn to active
+                audio_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                audio_encode_btn.IsEnabled = true;
+            }
         }
 
         private void ptz_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            // TODO
         }
 
         private void metadata_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            // TODO
         }
 
         private void save_btn_Click(object sender, RoutedEventArgs e)
@@ -172,6 +206,11 @@ namespace ONVIF_MediaProfilDashboard
         private void cancel_btn_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+            // Delete token if mode is Create and token is defined
+            if (profileToken != null && isCreateMode)
+            {
+                media.DeleteProfile(profileToken);
+            }
             this.Close();
         }
 

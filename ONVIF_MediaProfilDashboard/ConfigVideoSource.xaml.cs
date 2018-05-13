@@ -21,7 +21,7 @@ namespace ONVIF_MediaProfilDashboard
 {
 
     /// <summary>
-    /// Interaction logic for ConfigVideoEncoder.xaml
+    /// Interaction logic for ConfigVideoSource.xaml
     /// </summary>
     public partial class ConfigVideoSource : Window
     {
@@ -76,7 +76,7 @@ namespace ONVIF_MediaProfilDashboard
             }
             else
             {
-                media.AddConfiguration(profileToken, null, config);
+                media.AddConfiguration(profileToken, profileName, config);
             }
 
             this.DialogResult = true;
@@ -97,8 +97,9 @@ namespace ONVIF_MediaProfilDashboard
 
         private void show_btn_Click(object sender, RoutedEventArgs e)
         {
-            string configsStr = JsonConvert.SerializeObject(configs, Formatting.Indented);
-            io = new InfoOption(configsStr);
+            VideoSourceConfigurationOptions options = media.GetVideoSourceConfigurationOptions(null, null);
+            string optionsStr = JsonConvert.SerializeObject(options, Formatting.Indented);
+            io = new InfoOption(optionsStr);
             io.Show();
         }
 

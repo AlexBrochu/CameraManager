@@ -21,43 +21,58 @@ namespace ONVIF_MediaProfilDashboard
 {
 
     /// <summary>
-    /// Interaction logic for ConfigVideoEncoder.xaml
+    /// Interaction logic for ConfigAudioEncoder.xaml
     /// </summary>
-    public partial class ConfigVideoEncoder : Window
+    public partial class ConfigAudioEncoder : Window
     {
+        AudioEncoder2Configuration[] configs;
         public Media2Client media;
         public string profileToken;
-        public string configToken;
+        public new bool DialogResult { get; private set; }
+        InfoOption io;
         string profileName;
 
-        VideoEncoder2Configuration[] configs;
-        int selectedIndex;
-        InfoOption io;
+        int selectedIndex = 0;
 
-        public new bool DialogResult { get; private set; }
-
-        public ConfigVideoEncoder(Media2Client media, string token, string profileName)
+        public ConfigAudioEncoder(Media2Client media, string profileName, string token)
         {
             InitializeComponent();
+
             this.media = media;
             this.profileToken = token;
             this.profileName = profileName;
-
+            // handle closing event
             this.Closing += Window_Closing;
+        }
 
-            configs = media.GetVideoEncoderConfigurations(null, profileToken);
+        internal void setMedia(Media2Client media)
+        {
+            this.media = media;
+            configs = media.GetAudioEncoderConfigurations(null, null);
             setComboxItem();
+        }
+
+        private void setComboxItem()
+        {
+            List<string> data = new List<string>();
+            foreach (AudioEncoder2Configuration element in configs)
+            {
+                data.Add(element.Name);
+            }
+            configs_cbox.ItemsSource = data;
+            configs_cbox.SelectedItem = configs_cbox.Items.GetItemAt(0);
         }
 
         private void ok_btn_Click(object sender, RoutedEventArgs e)
         {
-            VideoEncoder2Configuration vec = JsonConvert.DeserializeObject<VideoEncoder2Configuration>(info_config.Text);
-            media.SetVideoEncoderConfiguration(vec);
+            if (configs == null)
+            {
+                ConfigurationRef[] config = { new ConfigurationRef() };
+                config[0].Type = "AudioEncoder";
+                config[0].Token = configs[selectedIndex].token;
 
-            ConfigurationRef[] config = { new ConfigurationRef() };
-            config[0].Type = "VideoEncoder";
-            config[0].Token = configs[selectedIndex].token;
-            media.AddConfiguration(profileToken, profileName, config);
+                media.AddConfiguration(profileToken, profileName, config);
+            }
 
             this.DialogResult = true;
             this.Close();
@@ -69,17 +84,6 @@ namespace ONVIF_MediaProfilDashboard
             this.Close();
         }
 
-        private void setComboxItem()
-        {
-            List<string> data = new List<string>();
-            foreach (VideoEncoder2Configuration element in configs)
-            {
-                data.Add(element.Name);
-            }
-            configs_cbox.ItemsSource = data;
-            configs_cbox.SelectedItem = configs_cbox.Items.GetItemAt(0);
-        }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedIndex = configs_cbox.SelectedIndex;
@@ -88,8 +92,8 @@ namespace ONVIF_MediaProfilDashboard
 
         private void show_btn_Click(object sender, RoutedEventArgs e)
         {
-            VideoEncoder2ConfigurationOptions[] videoEncodeOpt = media.GetVideoEncoderConfigurationOptions(null, null);
-            string configsStr = JsonConvert.SerializeObject(videoEncodeOpt, Formatting.Indented);
+            AudioEncoder2ConfigurationOptions[] audioOpt = media.GetAudioEncoderConfigurationOptions(null, null);
+            string configsStr = JsonConvert.SerializeObject(audioOpt, Formatting.Indented);
             io = new InfoOption(configsStr);
             io.Show();
         }
