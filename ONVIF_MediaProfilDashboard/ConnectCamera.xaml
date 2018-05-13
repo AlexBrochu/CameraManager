@@ -11,14 +11,14 @@
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="190" Margin="10,173,0,0" VerticalAlignment="Top" Width="109"/>
         <TextBox x:Name="textBox" Margin="124,0,13,12" TextWrapping="Wrap" Height="63" VerticalAlignment="Bottom"/>
         <vlc:VlcControl x:Name="video" Margin="124,47,13,80"/>
-        <TextBox x:Name="address" HorizontalAlignment="Left" Height="27" Margin="518,15,0,0" TextWrapping="Wrap" Text="195.60.68.239" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
-        <TextBox x:Name="user" HorizontalAlignment="Left" Height="27" Margin="702,15,0,0" TextWrapping="Wrap" Text="operator" VerticalAlignment="Top" Width="150"/>
-        <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="27" Margin="857,15,0,0" VerticalAlignment="Top" Width="150" Password="Onv!f2018"/>
-        <Button x:Name="button" Content="Connect" HorizontalAlignment="Left" Margin="229,15,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.405,-0.212" Height="27"/>
+        <TextBox x:Name="address" HorizontalAlignment="Left" Height="27" Margin="571,15,0,0" TextWrapping="Wrap" Text="195.60.68.239" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
+        <TextBox x:Name="user" HorizontalAlignment="Left" Height="27" Margin="755,15,0,0" TextWrapping="Wrap" Text="operator" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.92,0.494"/>
+        <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="27" Margin="910,15,0,0" VerticalAlignment="Top" Width="142" Password="Onv!f2018"/>
+        <Button x:Name="button" Content="Connect" HorizontalAlignment="Left" Margin="265,15,0,0" VerticalAlignment="Top" Width="117" RenderTransformOrigin="0.405,-0.212" Height="27"/>
         <Label Content="Saved Camera" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,1.115"/>
         <Label Content="Profiles Available" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.24,12.308"/>
-        <Button x:Name="save_btn" Content="Save" HorizontalAlignment="Left" Margin="124,15,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.405,-0.212" Height="27"/>
-        <TextBox x:Name="camera_name" HorizontalAlignment="Left" Height="27" Margin="334,15,0,0" TextWrapping="Wrap" Text="Awesome Camera" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
+        <Button x:Name="save_btn" Content="Save Login Info" HorizontalAlignment="Left" Margin="124,15,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.405,-0.212" Height="27"/>
+        <TextBox x:Name="camera_name" HorizontalAlignment="Left" Height="27" Margin="387,15,0,0" TextWrapping="Wrap" Text="Awesome Camera" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.888,0.704"/>
         <ListBox x:Name="listBox_saved" HorizontalAlignment="Left" Height="204" Margin="10,399,0,0" VerticalAlignment="Top" Width="109"/>
         <Button x:Name="create_profile_btn" Content="Create Profile" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.405,-0.212" Height="27" Click="create_profile_btn_Click"/>
         <Label Content="Info Logger :" HorizontalAlignment="Left" Margin="37,0,0,25" VerticalAlignment="Bottom" Height="33" Width="82"/>
