@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Choose Video Source" Height="388.967" Width="418.063" FontSize="20">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.ColumnDefinitions>
