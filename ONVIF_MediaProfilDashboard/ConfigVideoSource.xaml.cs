@@ -65,21 +65,28 @@ namespace ONVIF_MediaProfilDashboard
 
         private void ok_btn_Click(object sender, RoutedEventArgs e)
         {
-            ConfigurationRef[] config = { new ConfigurationRef() };
-            config[0].Type = "VideoSource";
-            config[0].Token = configs[selectedIndex].token;
+            if (configs != null)
+            {            
+                ConfigurationRef[] config = { new ConfigurationRef() };
+                config[0].Type = "VideoSource";
+                config[0].Token = configs[selectedIndex].token;
 
-            if (!useProfileToken)
-            {    
-                string name = profileName;
-                profileToken = media.CreateProfile(name, config);
+                if (!useProfileToken)
+                {    
+                    string name = profileName;
+                    profileToken = media.CreateProfile(name, config);
+                }
+                else
+                {
+                    media.AddConfiguration(profileToken, profileName, config);
+                }
+
+                this.DialogResult = true;
             }
             else
             {
-                media.AddConfiguration(profileToken, profileName, config);
+                this.DialogResult = false;
             }
-
-            this.DialogResult = true;
             this.Close();
         }
 

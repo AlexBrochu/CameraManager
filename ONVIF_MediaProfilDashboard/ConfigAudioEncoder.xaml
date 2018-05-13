@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ONVIF_MediaProfilDashboard"
         mc:Ignorable="d"
-        Title="Choose Audio Encoder" Height="409.363" Width="418.792" FontSize="20">
+        Title="Choose Audio Encoder" Height="443.598" Width="438.459" FontSize="20">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="217*"/>
@@ -16,6 +16,6 @@
         <Label Content="Configuration:" Margin="26,30,0,0" FontSize="16" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="122"/>
         <ComboBox x:Name="configs_cbox" HorizontalAlignment="Left" Margin="148,33,0,0" Width="120" SelectionChanged="ComboBox_SelectionChanged" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="2" />
         <TextBox x:Name="info_config" Margin="18,71,20,41" TextWrapping="Wrap" FontSize="12" Grid.ColumnSpan="2"/>
-        <Button x:Name="show_btn" Content="Show Config" Margin="66,33,20,0" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="show_btn_Click" Height="33" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="show_btn" Content="Show Options" Margin="66,33,20,0" RenderTransformOrigin="1.627,0.452" FontSize="16" Click="show_btn_Click" Height="33" VerticalAlignment="Top" Grid.Column="1"/>
     </Grid>
 </Window>

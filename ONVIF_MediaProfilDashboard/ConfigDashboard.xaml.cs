@@ -164,8 +164,8 @@ namespace ONVIF_MediaProfilDashboard
 
                 audio_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
                 // Next btn to active
-                ptz_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
-                ptz_btn.IsEnabled = true;
+                //ptz_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+                //ptz_btn.IsEnabled = true;
             }
         }
 

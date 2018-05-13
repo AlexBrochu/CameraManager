@@ -27,7 +27,7 @@ namespace ONVIF_MediaProfilDashboard
     public partial class ConnectCamera : Window
     {
 
-        // TO CHANGE 
+        // TO CHANGE In the properties resources of the project
         // VLC and Onvifex path
         string vlcPath = Properties.Resources.VLCPath;
         string onvifexPath = Properties.Resources.ONVIFEXPath;
@@ -55,6 +55,9 @@ namespace ONVIF_MediaProfilDashboard
             create_profile_btn.IsEnabled = false;
             modify_profile_btn.IsEnabled = false;
             delete_profile_btn.IsEnabled = false;
+
+            listBox.SelectionMode = SelectionMode.Single;
+            listBox_saved.SelectionMode = SelectionMode.Single;
 
             camera_name.GotFocus += InitTextbox;
             address.GotFocus += InitTextbox;
@@ -212,10 +215,12 @@ namespace ONVIF_MediaProfilDashboard
             if (inError)
             {
                 textBox.Foreground = new SolidColorBrush(Colors.Red);
+                textBox.FontSize = 16;
             }
             else
             {
                 textBox.Text = "";
+                textBox.FontSize = 12;
                 textBox.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
@@ -291,7 +296,7 @@ namespace ONVIF_MediaProfilDashboard
 
 
                 // Enable Modify and delete profiles
-                modify_profile_btn.IsEnabled = true;
+                //modify_profile_btn.IsEnabled = true;
                 delete_profile_btn.IsEnabled = true;
             }
             else

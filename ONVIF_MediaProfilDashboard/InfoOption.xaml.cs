@@ -33,20 +33,23 @@ namespace ONVIF_MediaProfilDashboard
         {
             InitializeComponent();
             options_txt.IsReadOnly = true;
+            list_options_name.SelectionMode = SelectionMode.Single;
 
             // Converting string to json object
             try
             {
                 this.options = JObject.Parse(options);
+                options_txt.Text = options;
             }
             // if fails try json array
             catch (Exception ex)
             {
                 this.options = null;
                 this.optionsArray = JArray.Parse(options);
+                options_txt.Text = optionsArray[0].ToString();
+                list_options_name.SelectedIndex = 0;
             }
-                        
-            options_txt.Text = options;
+
             LoadOptionsName();
         }
 

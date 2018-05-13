@@ -65,7 +65,7 @@ namespace ONVIF_MediaProfilDashboard
 
         private void ok_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (configs == null)
+            if (configs != null)
             {
                 ConfigurationRef[] config = { new ConfigurationRef() };
                 config[0].Type = "AudioSource";

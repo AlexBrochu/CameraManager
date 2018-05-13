@@ -51,15 +51,22 @@ namespace ONVIF_MediaProfilDashboard
 
         private void ok_btn_Click(object sender, RoutedEventArgs e)
         {
-            VideoEncoder2Configuration vec = JsonConvert.DeserializeObject<VideoEncoder2Configuration>(info_config.Text);
-            media.SetVideoEncoderConfiguration(vec);
+            if (configs != null)
+            {
+                VideoEncoder2Configuration vec = JsonConvert.DeserializeObject<VideoEncoder2Configuration>(info_config.Text);
+                media.SetVideoEncoderConfiguration(vec);
 
-            ConfigurationRef[] config = { new ConfigurationRef() };
-            config[0].Type = "VideoEncoder";
-            config[0].Token = configs[selectedIndex].token;
-            media.AddConfiguration(profileToken, profileName, config);
-
-            this.DialogResult = true;
+                ConfigurationRef[] config = { new ConfigurationRef() };
+                config[0].Type = "VideoEncoder";
+                config[0].Token = configs[selectedIndex].token;
+                media.AddConfiguration(profileToken, profileName, config);
+                this.DialogResult = true;
+            }
+            else
+            {
+                this.DialogResult = false;
+            }
+            
             this.Close();
         }
 
