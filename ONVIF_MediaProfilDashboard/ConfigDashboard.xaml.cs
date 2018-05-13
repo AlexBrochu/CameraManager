@@ -36,6 +36,8 @@ namespace ONVIF_MediaProfilDashboard
         ConfigVideoSource cvs;
 
         List<Button> allButtons = new List<Button>();
+        List<bool> btnState = new List<bool>();
+        string profileName;
 
         public ConfigDashboard()
         {
@@ -43,30 +45,59 @@ namespace ONVIF_MediaProfilDashboard
 
             media_profile_rect.Fill = new SolidColorBrush(System.Windows.Media.Colors.AliceBlue);
 
+            // Fill list of btn
             allButtons.Add(video_source_btn);
             allButtons.Add(video_encode_btn);
             allButtons.Add(audio_src_btn);
             allButtons.Add(audio_encode_btn);
             allButtons.Add(ptz_btn);
             allButtons.Add(metadata_btn);
+            // Disable all btn
+            setBtnStateList();
             disableAllBtn();
 
             // Video is the first step of config
             video_source_btn.IsEnabled = true;
             video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
+            saveBtnState();
+            if (profile_name.Text == "")
+            {
+                video_source_btn.IsEnabled = false;
+            }
+        }
+
+        // Initialize state btn to false
+        private void setBtnStateList()
+        {
+            foreach (Button btn in allButtons)
+            {
+                btnState.Add(false);
+            }
         }
 
         private void disableAllBtn()
         {
+            // Save state before disabling every btn
+            saveBtnState();
             foreach (Button btn in allButtons)
             {
                 btn.IsEnabled = false;
             }
         }
 
+        private void saveBtnState()
+        {
+            int i = 0;
+            foreach (Button btn in allButtons)
+            {
+                btnState[i] = btn.IsEnabled;
+                i++;
+            }
+        }
+
         private void video_encode_btn_Click(object sender, RoutedEventArgs e)
         {
-            cve = new ConfigVideoEncoder(media, this.profiles[0].token);
+            cve = new ConfigVideoEncoder(media, this.profiles[0].token, profileName);
             cve.ShowDialog();
             bool res = cve.DialogResult;
 
@@ -86,12 +117,12 @@ namespace ONVIF_MediaProfilDashboard
         {
             if (this.profileToken != null)
             {
-                cvs = new ConfigVideoSource();
+                cvs = new ConfigVideoSource(profileName);
                 cvs.profileToken = this.profileToken;
             }
             else
             {
-                cvs = new ConfigVideoSource();
+                cvs = new ConfigVideoSource(profileName);
             }
 
             cvs.setMedia(media);
@@ -148,6 +179,30 @@ namespace ONVIF_MediaProfilDashboard
         {
             this.media = media;
             profiles = media.GetProfiles(null, null);
+        }
+
+        private void profile_name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (profile_name.Text == "")
+            {
+                // Profile has to have a name all the time
+                disableAllBtn();
+            }
+            else
+            {
+                this.profileName = profile_name.Text;
+                reactiveBtn();
+            }
+        }
+
+        private void reactiveBtn()
+        {
+            int i = 0;
+            foreach (bool state in btnState)
+            {
+                allButtons[i].IsEnabled = state;
+                i++;
+            }
         }
     }
 }

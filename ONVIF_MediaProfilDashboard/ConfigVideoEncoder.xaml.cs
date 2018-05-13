@@ -28,6 +28,7 @@ namespace ONVIF_MediaProfilDashboard
         public Media2Client media;
         public string profileToken;
         public string configToken;
+        string profileName;
 
         VideoEncoder2Configuration[] configs;
         int selectedIndex;
@@ -35,11 +36,12 @@ namespace ONVIF_MediaProfilDashboard
 
         public new bool DialogResult { get; private set; }
 
-        public ConfigVideoEncoder(Media2Client media, string token)
+        public ConfigVideoEncoder(Media2Client media, string token, string profileName)
         {
             InitializeComponent();
             this.media = media;
             this.profileToken = token;
+            this.profileName = profileName;
 
             this.Closing += Window_Closing;
 
@@ -55,7 +57,7 @@ namespace ONVIF_MediaProfilDashboard
             ConfigurationRef[] config = { new ConfigurationRef() };
             config[0].Type = "VideoEncoder";
             config[0].Token = configs[selectedIndex].token;
-            media.AddConfiguration(profileToken, null, config);
+            media.AddConfiguration(profileToken, profileName, config);
 
             this.DialogResult = true;
             this.Close();

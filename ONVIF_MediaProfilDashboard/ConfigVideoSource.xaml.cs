@@ -30,14 +30,17 @@ namespace ONVIF_MediaProfilDashboard
         public string profileToken;
         public new bool DialogResult { get; private set; }
         InfoOption io;
+        string profileName;
 
         bool useProfileToken = false;
 
         int selectedIndex = 0;
 
-        public ConfigVideoSource()
+        public ConfigVideoSource(string profileName)
         {
             InitializeComponent();
+
+            this.profileName = profileName;
             // handle closing event
             this.Closing += Window_Closing;
         }
@@ -68,7 +71,7 @@ namespace ONVIF_MediaProfilDashboard
 
             if (!useProfileToken)
             {    
-                string name = "new profile";
+                string name = profileName;
                 profileToken = media.CreateProfile(name, config);
             }
             else
