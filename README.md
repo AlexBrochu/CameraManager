@@ -27,7 +27,7 @@ Currently the project allows the user to configure the video source, the video e
 
 ![alt text](https://github.com/AlexBrochu/CameraManager/blob/master/screenshots/dashboard.png)
 
-To create a valid profile the user has to configure at least the video source and encoder.
+To create a valid profile the user has to configure at least the video source and encoder. (Once it's done the save button is enabled.)
 A configuration has to be selected and can be modify with the configuration options available.
 To show the available options the user has to click on the Show Options. 
 
@@ -35,7 +35,7 @@ The configuration is in a JSON format and can be modify by editing it.
 
 ![alt text](https://github.com/AlexBrochu/CameraManager/blob/master/screenshots/change_video_source.png)
 
-When an element of the media Profile is configure the button turns green and the next button corresponding to the next element to configure turns blue. 
+When an element of the media Profile is configured, the button turns green and the next button corresponding to the next element to configure turns blue. 
 
 ![alt text](https://github.com/AlexBrochu/CameraManager/blob/master/screenshots/configureProfile.png)
 
