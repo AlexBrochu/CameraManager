@@ -64,7 +64,6 @@ namespace ONVIF_MediaProfilDashboard
 
             // Video is the first step of config
             video_source_btn.IsEnabled = true;
-            video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
             saveBtnState();
             if (profile_name.Text == "")
             {
@@ -91,6 +90,12 @@ namespace ONVIF_MediaProfilDashboard
             }
         }
 
+        private void LockProfileName()
+        {
+            profile_name.IsReadOnly = true;
+            profile_name.Foreground = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
+        }
+
         private void saveBtnState()
         {
             int i = 0;
@@ -114,7 +119,6 @@ namespace ONVIF_MediaProfilDashboard
 
                 video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
                 // Next btn to active
-                audio_src_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
                 audio_src_btn.IsEnabled = true;
 
                 save_btn.IsEnabled = true;
@@ -146,7 +150,6 @@ namespace ONVIF_MediaProfilDashboard
 
                 video_source_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
                 // Next btn to active
-                video_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
                 video_encode_btn.IsEnabled = true;
             }
         }
@@ -182,7 +185,6 @@ namespace ONVIF_MediaProfilDashboard
 
                 audio_src_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
                 // Next btn to active
-                audio_encode_btn.Background = new SolidColorBrush(System.Windows.Media.Colors.CadetBlue);
                 audio_encode_btn.IsEnabled = true;
             }
         }

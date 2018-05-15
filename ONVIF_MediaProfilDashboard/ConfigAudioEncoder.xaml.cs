@@ -34,21 +34,26 @@ namespace ONVIF_MediaProfilDashboard
 
         int selectedIndex = 0;
 
-        public ConfigAudioEncoder(Media2Client media, string profileName, string token)
+        public ConfigAudioEncoder(Media2Client media, string token, string profileName)
         {
             InitializeComponent();
 
             this.media = media;
             this.profileToken = token;
             this.profileName = profileName;
+            setConfigs();
             // handle closing event
             this.Closing += Window_Closing;
         }
 
-        internal void setMedia(Media2Client media)
+        private void setConfigs()
         {
-            this.media = media;
             configs = media.GetAudioEncoderConfigurations(null, null);
+            // Disable edit config
+            if (configs == null)
+            {
+                info_config.IsReadOnly = true;
+            }
             setComboxItem();
         }
 
@@ -67,7 +72,19 @@ namespace ONVIF_MediaProfilDashboard
         {
             if (configs != null)
             {
-                ConfigurationRef[] config = { new ConfigurationRef() };
+                try
+                {
+                    AudioEncoder2Configuration aec = JsonConvert.DeserializeObject<AudioEncoder2Configuration>(info_config.Text);
+                    media.SetAudioEncoderConfiguration(aec);
+                }
+                catch (Exception ex)
+                {
+                    error_log.Visibility = Visibility.Visible;
+                    error_log.Content = "Error in the JSON format!";
+                    error_log.Foreground = new SolidColorBrush(Colors.Red);
+                    return;
+                }
+            ConfigurationRef[] config = { new ConfigurationRef() };
                 config[0].Type = "AudioEncoder";
                 config[0].Token = configs[selectedIndex].token;
 
@@ -104,6 +121,15 @@ namespace ONVIF_MediaProfilDashboard
             {
                 io.Close();
             }
+        }
+
+        private void reset_config_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset info_config content
+            info_config.Text = JsonConvert.SerializeObject(configs[selectedIndex], Formatting.Indented);
+
+            // Reset error log
+            error_log.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -49,6 +49,11 @@ namespace ONVIF_MediaProfilDashboard
         {
             this.media = media;
             configs = media.GetVideoSourceConfigurations(null, null);
+            // Disable edit config
+            if (configs == null)
+            {
+                info_config.IsReadOnly = true;
+            }
             setComboxItem();
         }
 
@@ -66,7 +71,22 @@ namespace ONVIF_MediaProfilDashboard
         private void ok_btn_Click(object sender, RoutedEventArgs e)
         {
             if (configs != null)
-            {            
+            {
+                // Take the video source from the info_config textbox
+                try
+                {
+                    VideoSourceConfiguration vsc = JsonConvert.DeserializeObject<VideoSourceConfiguration>(info_config.Text);
+                    media.SetVideoSourceConfiguration(vsc);
+                }
+                catch (Exception ex)
+                {
+                    error_log.Visibility = Visibility.Visible;
+                    error_log.Content = "Error in the JSON format!";
+                    error_log.Foreground = new SolidColorBrush(Colors.Red);
+
+                    return;
+                }
+                
                 ConfigurationRef[] config = { new ConfigurationRef() };
                 config[0].Type = "VideoSource";
                 config[0].Token = configs[selectedIndex].token;
@@ -116,6 +136,15 @@ namespace ONVIF_MediaProfilDashboard
             {
                 io.Close();
             }
+        }
+
+        private void reset_config_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset info_config content
+            info_config.Text = JsonConvert.SerializeObject(configs[selectedIndex], Formatting.Indented);
+
+            // Reset error log
+            error_log.Visibility = Visibility.Hidden;
         }
     }
 }

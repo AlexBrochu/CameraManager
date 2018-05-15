@@ -46,6 +46,11 @@ namespace ONVIF_MediaProfilDashboard
             this.Closing += Window_Closing;
 
             configs = media.GetVideoEncoderConfigurations(null, profileToken);
+            // Disable edit config
+            if (configs == null)
+            {
+                info_config.IsReadOnly = true;
+            }
             setComboxItem();
         }
 
@@ -53,8 +58,20 @@ namespace ONVIF_MediaProfilDashboard
         {
             if (configs != null)
             {
-                VideoEncoder2Configuration vec = JsonConvert.DeserializeObject<VideoEncoder2Configuration>(info_config.Text);
-                media.SetVideoEncoderConfiguration(vec);
+                // Take the video source from the info_config textbox
+                try
+                {
+                    VideoEncoder2Configuration vec = JsonConvert.DeserializeObject<VideoEncoder2Configuration>(info_config.Text);
+                    media.SetVideoEncoderConfiguration(vec);
+                }
+                catch (Exception ex)
+                {
+                    error_log.Visibility = Visibility.Visible;
+                    error_log.Content = "Error in the JSON format!";
+                    error_log.Foreground = new SolidColorBrush(Colors.Red);
+
+                    return;
+                }
 
                 ConfigurationRef[] config = { new ConfigurationRef() };
                 config[0].Type = "VideoEncoder";
@@ -107,6 +124,15 @@ namespace ONVIF_MediaProfilDashboard
             {
                 io.Close();
             }
+        }
+
+        private void reset_config_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset info_config content
+            info_config.Text = JsonConvert.SerializeObject(configs[selectedIndex], Formatting.Indented);
+
+            // Reset error log
+            error_log.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -59,10 +59,6 @@ namespace ONVIF_MediaProfilDashboard
             listBox.SelectionMode = SelectionMode.Single;
             listBox_saved.SelectionMode = SelectionMode.Single;
 
-            camera_name.GotFocus += InitTextbox;
-            address.GotFocus += InitTextbox;
-            user.GotFocus += InitTextbox;
-            password.GotFocus += InitTextbox;
             button.Click += OnConnect;
             save_btn.Click += OnSave;
             listBox_saved.SelectionChanged += OnSavedSelectionChanged;
@@ -222,20 +218,6 @@ namespace ONVIF_MediaProfilDashboard
                 textBox.Text = "";
                 textBox.FontSize = 12;
                 textBox.Foreground = new SolidColorBrush(Colors.Black);
-            }
-        }
-
-        private void InitTextbox(object sender, RoutedEventArgs e)
-        {
-            if (sender is TextBox)
-            {
-                (sender as TextBox).Text = "";
-                (sender as TextBox).Background = new SolidColorBrush(Colors.White);
-            }
-            else if (sender is PasswordBox)
-            {
-                (sender as PasswordBox).Password = "";
-                (sender as PasswordBox).Background = new SolidColorBrush(Colors.White);
             }
         }
 
