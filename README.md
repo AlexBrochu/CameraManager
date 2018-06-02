@@ -10,7 +10,7 @@ This project is a proof of concept that documentation can be used dynamically. I
 
 # Setup Project
 Before running the project:
-You have to change the value of two properties ONVIFEXPath and VLCPath with your path to these resources. 
+You have to change the value of the property ONVIFEXPath with your path to this resources. (VLCPath is contained in the project.)
 
 ![alt text](https://github.com/AlexBrochu/CameraManager/blob/master/screenshots/setup_project.png)
 
