@@ -68,14 +68,5 @@ namespace ONVIF_MediaProfilDashboard.Properties {
                 return ResourceManager.GetString("ONVIFEXPath", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to d:\Programs File\VLC\.
-        /// </summary>
-        internal static string VLCPath {
-            get {
-                return ResourceManager.GetString("VLCPath", resourceCulture);
-            }
-        }
     }
 }

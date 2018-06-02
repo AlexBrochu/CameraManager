@@ -120,7 +120,4 @@
   <data name="ONVIFEXPath" xml:space="preserve">
     <value>D:\temp\src\onvifex\Vlc.DotNet-develop\lib\x64</value>
   </data>
-  <data name="VLCPath" xml:space="preserve">
-    <value>d:\Programs File\VLC\</value>
-  </data>
 </root>

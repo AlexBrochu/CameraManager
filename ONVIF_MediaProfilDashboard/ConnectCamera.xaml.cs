@@ -28,8 +28,8 @@ namespace ONVIF_MediaProfilDashboard
     {
 
         // TO CHANGE In the properties resources of the project
-        // VLC and Onvifex path
-        string vlcPath = Properties.Resources.VLCPath;
+        // Onvifex path
+        string vlcPath = System.IO.Path.Combine(System.IO.Path.GetFullPath(@"..\..\"), "Vlc");
         string onvifexPath = Properties.Resources.ONVIFEXPath;
 
         int previousSavedConnIndex = -1;
